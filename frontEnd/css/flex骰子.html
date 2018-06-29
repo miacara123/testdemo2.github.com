@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .outer1 {
+            width: 300px;
+            height: 300px;
+            background-color: #333;
+            position: relative;
+        }
+
+        .outer1 .box1 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(to bottom, #fff, #ccc);
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -100px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* .outer1 .box1:after {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background-color: rgb(234, 234, 234);
+            border-radius: 5px;
+            box-shadow: 0px 0px 6px rgb(232, 226, 226);
+            position: absolute;
+            left: 5px;
+            top: 5px;
+        } */
+        .item1{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: #000;
+            border-radius: 100%;
+        }
+        /* .item1:nth-of-type(2) {
+            align-self: center;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="outer1">
+        <div class="box1">
+            <span class="item1"></span>
+            <span class="item1"></span>
+            <span class="item1"></span>
+            <span class="item1"></span>
+            <span class="item1"></span>
+            <span class="item1"></span>
+            <span class="item1"></span>
+            <span class="item1"></span>
+            <span class="item1"></span>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .slider {
+            width: 500px;
+            height: 8px;
+            background-color: #aaa;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .slider .slider-block {
+            width: 10px;
+            height: 20px;
+            background-color: blue;
+            position: absolute;
+            left: 0;
+            top: -6px;
+        }
+
+        .slider .slider-mask {
+            /*width: 300px;*/
+            height: 8px;
+            background-color: blue;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="slider-block"></div>
+        <div class="slider-mask"></div>
+    </div>
+    <p id="text">当前进度：50%</p>
+
+    <script type="text/javascript">
+        // window.onload = function () {
+            var sliderBlock = document.getElementsByClassName('slider-block')[0];
+            var mask = document.getElementsByClassName('slider-mask')[0];
+            var slider = document.getElementsByClassName('slider')[0];
+            var text = document.getElementById('text');
+
+            // 当鼠标在滑块上面并且按压下鼠标的左键
+            sliderBlock.onmousedown = function () {
+                console.log("按下鼠标");
+
+                //开始监控鼠标的滑动
+                //因为拖动时，鼠标不一定要在滑块上，所以使用document来监听鼠标的滑动
+                document.onmousemove = function (e) {
+
+                    mask.style.display = 'block';
+                    var e = e ? e : window.event;
+
+                    //获取实际的鼠标偏移量
+                    var x = e.pageX - slider.offsetLeft;
+                    console.log(e.pageX);
+                    x = x < 0 ? 0 : x;
+                    x = x > slider.offsetWidth ? slider.offsetWidth : x;
+                    // console.log('x:'+x);
+
+                    mask.style.width = x + 'px';
+                    sliderBlock.style.left = (x - sliderBlock.offsetWidth / 2) + 'px';
+
+                    // text.innerHTML='';
+                    // var txt = text.innerHTML;
+                    var value = parseInt(x / slider.offsetWidth * 100);
+                    text.innerHTML = '当前进度：' + value + '%';
+                    // console.log(txt);
+                    // mask / slider = progress;
+                }
+            }
+
+            //当鼠标送开时，移除移动监听事件
+            document.onmouseup = function () {
+
+                //取消了move事件的监听
+                //将触发函数设置为空
+                //则不再监控鼠标的滑动  所以滑动条的值也不再改变
+                document.onmousemove = null;
+            }
+        // }
+    </script>
+</body>
+
+</html>

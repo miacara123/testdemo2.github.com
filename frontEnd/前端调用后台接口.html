@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .head,
+        li div {
+            display: inline-block;
+            width: 70px;
+            text-align: center;
+        }
+
+        li .id,
+        li .sex,
+        .id,
+        .sex {
+            width: 15px;
+        }
+
+        li .name,
+        .name {
+            width: 40px;
+        }
+
+        li .tel,
+        .tel {
+            width: 90px;
+        }
+
+        li .del,
+        .del {
+            width: 15px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .user-delete {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    用户名:<input id="adminName" type="text" >
+    密码: <input id="psw" type="password">
+    <input type="button" value="登录">
+</body>
+
+<script>
+    var xhr;
+    if(window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    var adminName = document.getElementById('adminName').value;
+    var psw = document.getElementById('psw').value;
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            var tip = document.getElementById('tip');
+            var text = xhr.responseText;
+            var resultJson = eval();
+            var result = resultJson.result;
+            var code = resultJson.code;
+            if(result == "fail") {
+                if(code == 101) {
+                    tip.innerHTML = "密码错误"
+                } else if(code == 102) {
+                    tip.innerHTML = "用户名不存在"
+                }
+            } else {
+                window.location.href = "center.html";
+            }
+        }
+    }
+
+    xhr.open("POST", "controll/login", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("adminName="+adminName+"$=psw"+psw);
+</script>
+
+</html>

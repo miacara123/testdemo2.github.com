@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 去重
+        // var arr1 = [1, 2, 3, 3, 4, 5, 5, 5];
+        // var arr2 = [];
+        // var obj = {};
+        // for (var i = 0; i < arr1.length; i++) {
+        //     if(arr2.indexOf(arr1[i]) == -1){
+        //         arr2.push(arr1[i]);
+        //     }
+        // }
+        // console.log(arr2);
+
+        // for (var i = 0;i < arr1.length; i++) {
+        //     if(!obj[arr1[i]]) {
+        //         obj[arr1[i]] = 1;
+        //         arr2.push(arr1[i]);
+        //     }
+        // }
+        // console.log(arr2);
+        // console.log(obj);
+
+        // 计算重复出现的元素
+        // var arr1 = [1, 2, 3, 3, 4, 5, 5, 5];
+        // var arr2 = [];
+        // var obj = {};
+        // for(var i = 0;i < arr1.length;i++) {
+        //     if(!obj[arr1[i]]) {
+        //         obj[arr1[i]] = 1;
+        //     } else {
+        //         obj[arr1[i]]++;
+        //     }
+        // }
+        // console.log(obj);        
+
+        // for(var k in obj) {
+        //     if(obj[k] > 1) {
+        //         arr2.push(k);
+        //     }
+        // }
+        // console.log(arr2);
+
+        // 查找出字符串中重复的字符
+        // var str = "abareevadrgr";
+        // var arr1 = str.split("");
+        // var arr2 = [];
+        // var arr3 = [];
+        
+        // for(var i = 0;i < arr1.length;i++){
+        //     if(arr2.indexOf(arr1[i]) == -1) {
+        //         arr2.push(arr1[i]);   // 中转站 arr2数组后面不需要用到 arr2存放去重的字符
+        //     } else {   // 在arr2中找到了的 arr1剩下的a,e,a,r,r(出现次数1以上的字符)
+        //         if(arr3.indexOf(arr1[i]) == -1) {  // 在剩下的a,e,a,r,r中去重 避免将重复的元素输出
+        //             arr3.push(arr1[i]);      
+        //         }
+        //     }
+        // }
+        // console.log(arr2);
+        // console.log(arr3);
+
+    </script>
+</body>
+
+</html>

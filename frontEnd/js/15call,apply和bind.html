@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // call apply bind是用来干什么的
+        // var a = {
+        //     user: "追梦子",
+        //     fn: function() {
+        //         console.log(this.user);
+        //     }
+        // }
+        // var b = a.fn;
+        // b(); // undefined this指向window
+
+        // var a2 = {
+        //     user: "追梦子",
+        //     fn: function() {
+        //         console.log(this.user);
+        //     }
+        // }
+        // a2.fn(); //追梦子 this指向a2
+
+
+        // call(a, 1, 2, 3, 4)
+        var a = {
+            user: "追梦子",
+            fn: function () {
+                console.log(this.user); // 追梦子
+            }
+        }
+        var b = a.fn;
+        b.call(a); // 把this指向a
+        // 通过在call方法,给第一个参数添加到哪个环境中,简单来说,this就会指向哪个对象
+
+        // apply(a, [1, 2, 3, 4])
+        var a = {
+            user: "追梦子",
+            fn: function () {
+                console.log(this.user); //追梦子
+            }
+        }
+        var b = a.fn;
+        b.apply(a); // 把this指向a
+
+        // bind()
+        var a = {
+            user: "追梦子",
+            fn: function () {
+                console.log(this.user);
+            }
+        }
+        var b = a.fn;
+        b.bind(a); // 发现没有打印,因为bind实际上返回的是一个修改后的函数
+        // 修改成:
+        var b = a.fn;
+        var c = b.bind(a);
+        c();
+
+    </script>
+</body>
+
+</html>

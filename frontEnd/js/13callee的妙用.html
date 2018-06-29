@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // arguments 存放传入到函数的全部参数 eg:
+        function showargs() {
+            console.log(arguments);
+        }
+        showargs(1, 2, 3, 4); // Arguments[4] :[1, 2, 3, 4]
+
+        // callee 属性是 arguments 对象的一个成员，仅当相关函数正在执行时才可用。
+        // callee 属性的初始值就是正被执行的 Function 对象，这允许匿名的递归函数。
+        function showcallee() {
+            var a = '这是代码';
+            var b = '这是另一段代码';
+            var c = a + b;
+            console.log(arguments.callee);
+            return c;
+        }
+        showcallee();  // 将函数showcallee内容输出 function showcallee() { ... }
+
+        function func(num) {
+            if (num <= 1) {
+                return 1;
+            } else {
+                return num * arguments.callee(num - 1);
+            }
+        }
+        console.log(func(5));
+    </script>
+</body>
+
+</html>

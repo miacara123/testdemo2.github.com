@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>    
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1, 2, 3, 4, 5];
+        // 增加
+        // 1
+        // arr.splice(2, 1, "h", "y");  // 会改变原数组(返回的是含有被删的元素的数组)  2:从何处开始添加/删除元素 
+                                     // 1:应该删除多少元素(如果为0,则不删除元素;如果没有这个参数就一直删到数组结尾)
+                                     // "h" "y" 要添加到数组的新元素
+        // console.log(arr);  // [1, 2, "h", "y", 4, 5]
+
+        // 2
+        // var len = arr.push("h"); // 返回新的长度,会改变数组
+        // console.log(arr);  // [1, 2, 3, 4, 5, "h"]
+        // console.log(len);  // 6
+
+        // 3
+        // var len = arr.unshift("h");  // 返回新的长度,会改变数组
+        // console.log(arr);  // ["h", 1, 2, 3, 4, 5]
+        // console.log(len);  // 6 
+
+        // 删除
+        // 1
+        // arr.splice(2, 2);  // 从第三个位置开始删除数组后的两个元素
+        // console.log(arr);  // [1, 2, 5]
+
+        // 2
+        // var item = arr.pop(); // 删除数组最后一个元素并返回删除的元素
+        // console.log(arr); // [1, 2, 3, 4]
+        // console.log(item);// 5
+
+        // 3
+        // var item = arr.shift(); // 删除数组第一个元素并返回删除的元素
+        // console.log(arr);  // [2, 3, 4, 5]
+        // console.log(item); // 1
+
+        // 替换
+        // var item = arr.splice(3, 1, "h");
+        // console.log(arr);  // [1, 2, 3, "h", 5]
+        // console.log(item); // [4]
+
+        // 查询
+        // var nArr = arr.slice(1, 3); // 不会改变原数组 截取从index=1的元素开始到index=3的元素截止
+        // console.log(arr);   // [1, 2, 3, 4, 5]
+        // console.log(nArr);  // [2, 3]
+
+        
+
+    </script>
+</body>
+</html>

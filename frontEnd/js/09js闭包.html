@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.定义普通函数A 2.在A中定义普通函数B 3.在A中返回B 4.执行A,并把A的返回结果赋值给变量C 5.执行C
+        // 以上总结成一句话就是:函数A的内部函数B被函数A外的一个变量C引用
+        // 再加工一下就是闭包的定义: 当一个内部函数被其外部函数之外的变量引用时,就形成了一个闭包
+        // function A() {
+        //     function B() {
+        //         console.log('Hello Closure!');
+        //     }
+        //     return B;
+        // }
+        // var C = A();
+        // C();
+
+        // function A() {
+        //     var count = 0;
+        //     function B() {
+        //         count++;
+        //         console.log(count);
+        //     }
+        //     return B;
+        // }
+        // var C = A();
+        // C(); // 1
+        // C(); // 2
+        // C(); // 3
+
+        function f1() {
+            var n = 999;
+            nAdd = function () {
+                n += 1;
+                console.log(n);
+            }
+
+            function f2() {
+                console.log(n);
+            }
+            return f2;
+        }
+        f1()();
+        // result(); // 999
+        nAdd();
+        // result(); // 1000
+        // 函数f1中的局部变量n一直保存在内存中,并没有在f1调用后自动清除
+        // 这是因为f1是f2的父函数,而f2被赋给了一个全局变量,导致f2始终在内存中,
+        // 而F2的存在依赖于f1,因此f1也始终存在内存中,不会在调用结束后,被垃圾回收机制回收.
+
+        function outerFun() {
+            a = 0;
+            console.log(a);
+        }
+        var a = 4;
+        outerFun(); // 0
+        console.log(a); // 0
+
+        function outerFun2() {
+            var a = 0;
+            console.log(a);
+        }
+        var a = 4;
+        outerFun2(); // 0
+        console.log(a); // 4
+
+        console.log("*****************************");
+        // n=0,o=undefined
+        function fun(n, o) {
+            console.log(o);
+            return {
+                fun: function (m) {
+                    return fun(m, n);
+                }
+            };
+        }
+        var a = fun(0);
+        a.fun(1);
+        a.fun(2);
+        a.fun(3); //undefined,0,0,0
+        var b = fun(0).fun(1).fun(2).fun(3); //undefined,?,?,?
+        var c = fun(0).fun(1);
+        c.fun(2);
+        c.fun(3); //undefined,?,?,?
+        //问:三行a,b,c的输出分别是什么？
+
+        var fn2 = function () {
+            console.log(fn2); // ƒ () { console.log(fn2); }
+        };
+        fn2();
+
+        // var o = {
+        //     fn: function() {
+        //         console.log(fn);
+        //     }
+        // };
+        // o.fn(); // error
+        // // 使用var或是非对象内部的函数表达式内,可以访问到存放当前函数的变量;在对象内部的不能访问到
+
+        // function Foo() {
+        //     getName = function () {
+        //         alert(1);
+        //     };
+        //     return this;
+        // }
+
+        // Foo.getName = function () {
+        //     alert(2);
+        // };
+        // Foo.prototype.getName = function () {
+        //     alert(3);
+        // };
+        // var getName = function () {
+        //     alert(4);
+        // };
+
+        // function getName() {
+        //     alert(5);
+        // }
+
+        // 变量和函数声明提升后:
+        function Foo() {
+            getName = function () {
+                alert(1);
+            };
+            return this;
+        }
+        // console.log(Foo()); // window  因为是直接调用,所以return的this指向window对象
+        var getName;
+        function getName() {
+            alert(5);
+        }
+        Foo.getName = function() {
+            alert(2);
+        }
+        Foo.prototype.getName = function () {
+            alert(3);
+        }
+        getName = function() {
+            alert(4);          // 执行完第三问后,此时的getName被第一个Foo函数的getName赋值 alert(1);
+        }
+
+        //请写出以下输出结果：
+        Foo.getName();     // 2
+        getName();         // 4
+        Foo().getName();   // 1
+        getName();         // 1
+        new Foo.getName(); // 2
+        new Foo().getName();    // 3
+        new new Foo().getName();// 3
+
+        console.log("*************************************");
+        function parent1() {
+            var message = 'Hi HYL!'
+            function child1() {
+                console.log(message);
+            }
+            child1();
+        }
+        parent1();
+
+        function parent2() {
+            var message = 'Hello World!';
+
+            function child2() {
+                console.log(message);
+            }
+            return child2;
+        }
+        var childFN = parent2(); // childFN是一个闭包对象,该对象既包含child()函数,还包括创建该函数时的环境变量,比如message变量
+        childFN();
+    </script>
+</body>
+
+</html>

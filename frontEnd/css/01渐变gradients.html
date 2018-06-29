@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #grad1{
+            height: 300px;
+            background: linear-gradient(red, grey);
+        }
+
+        #grad2{
+            height: 300px;
+            background: radial-gradient();
+        }
+
+        #text1{
+            width: 100px;
+            height: 100px;
+            background-color: rgb(211, 85, 35);
+            box-shadow: 10px 10px 10px #888888;
+        }
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background: rgb(211, 35, 50);
+            /* transform: translate(100px, 0px); */
+            /* transform: rotate(45deg); */
+            /* transform: scale(2, 2); */
+            /* transform: skew(45deg); */
+            /* transform: rotateY(45deg); */
+
+            transition: width 2s;
+            animation: myFirst 5s;
+        }        
+
+        #box1:hover{
+            width: 300px;
+        }
+
+        @keyframes myFirst{
+            from {
+                background: red;
+            }
+            to {
+                background: pink;
+            }
+
+        }
+
+        @media screen and (min-width: 480px) {
+            body {
+                background: orange;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="grad1">线性渐变的盒子</div>
+    <div id="grad2">径向渐变的盒子</div>
+    <div id="text1">盒子阴影</div>
+    <div id="box1">正面</div>
+</body>
+</html>

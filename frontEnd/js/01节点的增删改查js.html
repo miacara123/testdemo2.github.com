@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>oo</li>
+    </ul>
+    <button id="add">插入</button>
+    <button id="replace">替换</button>
+    <button id="remove">删除</button>
+    <button id="query">查询</button>
+
+    <script>
+        var list = document.getElementById('list');
+        var add = document.getElementById('add');
+        var replace = document.getElementById('replace');
+        var remove = document.getElementById('remove');
+        var query = document.getElementById('query');
+
+        console.log(list.childNodes); // list.childNodes表示list的所有子节点(包括#text文本节点). list.children表示list的所有子节点()
+
+        // 创建节点
+        var  nli = document.createElement('li');
+        nli.innerHTML = 'hello';
+
+        function addNode() {
+            // 尾插
+            // list.appendChild(nli);
+
+            // 头插
+            list.insertBefore(nli, list.children[1]);
+        }
+
+        function replaceNode() {
+            list.replaceChild(nli, list.children[2]);
+        }
+
+        function removeNode() {
+            list.removeChild(list.children[3]);
+        }
+
+        function queryNode() {
+            console.log(list.querySelectorAll('li'));
+        }
+
+        add.addEventListener('click', addNode);
+        replace.addEventListener('click', replaceNode);
+        remove.addEventListener('click', removeNode);
+        query.addEventListener('click', queryNode);
+
+    </script>
+</body>
+</html>

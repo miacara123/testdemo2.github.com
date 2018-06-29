@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 块级元素水平居中1 margin: 0 auto;*/
+        /* .wrapper{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+        }
+        .content{
+            width: 150px;
+            height: 150px;
+            background-color: #6699ff;
+            margin: 0 auto;            
+        } */
+
+        /* 块级元素水平居中2 display: flex;*/
+        /* .wrapper{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: space-around;                  
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        } */
+
+        /* 块级元素垂直居中1 padding-top,padding-bottom*/
+        /* .wrapper{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            padding: 150px 0 150px 0;
+            box-sizing: border-box;
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        } */
+
+        /* 块级元素垂直居中2 display:flex*/
+        /* .wrapper{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        } */
+
+        /* 块级元素垂直居中3 未知高度*/
+        /* .wrapper{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            position: relative;
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        } */
+
+
+        /* 行内元素水平居中1 text-align: center;*/
+        /* .wrapper2{
+            width: 400px;
+            height: 400px;
+            text-align: center;
+            background-color: #ddd;
+        } */
+        
+        /* 行内元素水平居中2 display: flex*/
+        /* .wrapper2{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+        } */
+
+        /* 行内元素垂直居中1 line-height*/
+        /* .wrapper2{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            line-height: 400px;
+        } */
+
+        /* 行内元素垂直居中2 display:table*/
+        /* .wrapper2{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            display: table;
+            
+        }
+        p{
+            display: table-cell;
+            vertical-align: middle;
+        } */
+
+        /* 行内元素垂直居中3 display:flex */
+        /* .wrapper2{
+            width: 400px;
+            height: 400px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+        } */
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content"></div>
+    </div>
+
+    <div class="wrapper2">
+        <p>这是一段居中的文本</p>
+        <!-- <img src="/home/hyl/图片/2018-05-14 10-56-02屏幕截图.png" alt=""> -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        .nav {
+            width: 900px;
+            height: 50px;
+            border-radius: 10px;
+            padding: 0 50px;
+            margin: 100px auto;
+            background: #fff url('./images/rss.png') 950px center no-repeat;
+            position: relative;
+        }
+
+        .nav li {
+            list-style: none;
+            float: left;
+            font-size: 18px;
+            line-height: 50px;
+            padding: 0 20px;
+            position: relative;
+            /* 设置相对定位 是为了让字浮在云上,不然 云脱标 一直浮在字上*/
+            z-index: 1;
+            cursor: pointer;
+
+        }
+
+        #cloud {
+            position: absolute;
+            width: 83px;
+            height: 42px;
+            background: pink;
+            top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <span id="cloud"></span>
+        <ul>
+            <li>标签1</li>
+            <li>标签2</li>
+            <li>标签3</li>
+            <li>标签4</li>
+            <li>标签5</li>
+            <li>标签6</li>
+        </ul>
+    </div>
+    <script>
+        window.onload = function () {
+            var cloud = document.getElementById('cloud');
+            var target = cloud.offsetLeft;
+            var current = target;
+            var selected = target;
+
+            setInterval(function () {
+                current = current + (target - current) / 10;
+                cloud.style.left = current + 'px';
+            }, 20)
+            var lis = document.getElementsByTagName('li');
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].onclick = function() {
+                    var left = this.offsetLeft;
+                    target = left;
+                    selected = left;
+                }
+                lis[i].onmouseover = function() {
+                    target = this.offsetLeft;
+                }
+                lis[i].onmouseout = function() {
+                    target = selected;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box div:nth-of-type(1){
+            width: 100%;
+            height: 900px;
+            background-color: pink;
+        }
+        .box div:nth-of-type(2){
+            width: 100%;
+            height: 900px;
+            background-color: grey;
+        }
+        .box div:nth-of-type(3){
+            width: 100%;
+            height: 900px;
+            background-color: green;
+        }
+        .nav {
+            width: 36px;
+            position: fixed;
+            top: 50%;
+            /* margin-top: -118px; */
+            left: 50%;
+            /* margin-left: 500px; */
+            border: 1px solid #f10215;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            width: 36px;
+            height: 36px;
+            border-top: 1px solid #f10215;
+            margin-top: -1px;
+        }
+
+        .nav li a {
+            display: block;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: center;
+            text-decoration: none;
+            padding: 3px 0;
+            color: #666;
+            color: transparent;
+            background-color: #f8f8f8;
+        }
+
+        .nav li a:hover,
+        .nav li.current a {
+            color: #fff !important;
+            background-color: #f10215;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div>家电通讯</div>
+        <div>美容珠宝</div>
+        <div>居家生活</div>
+
+    </div>
+    <div class="nav">
+        <ul>
+            <li class="current">
+                <a href="javascript:;">家电
+                    <br />通讯</a>
+            </li>
+            <li>
+                <a href="javascript:;">美容
+                    <br />珠宝</a>
+            </li>
+            <li>
+                <a href="javascript:;">居家
+                    <br />生活</a>
+            </li>
+            <li id="returnTop">
+                <a href="javascript:;">返回
+                    <br />顶部</a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        $(function() {
+            $('#returnTop').siblings().find('a').each(function(index, element) {
+                $(element).click(function() {
+                    var index = $(this).parent().index();
+                    var targetBox = $('.box div').eq(index);
+                    $('html, body').stop().animate({
+                        scrollTop: targetBox.offset().top
+                    })
+                })
+            })
+            $('#returnTop').click(function() {
+                $('html, body').stop().animate({
+                    scrollTop: 0
+                })
+            })
+            $(window).scroll(function() {
+                var scrollTop = $(document).scrollTop();
+                if(scrollTop > 0) {
+                    var nIndex = 0;
+                    $('.box div').each(function(index, element) {
+                        if(scrollTop < $(element).offset().top) {
+                            nIndex = index;
+                        }
+                    });
+                    $('.nav li').eq(nIndex).addClass('current').siblings().removeClass('current');
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>

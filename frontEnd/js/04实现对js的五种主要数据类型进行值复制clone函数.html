@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function clone(obj) {
+            var o;
+            switch (typeof obj) {
+                case "undefined":
+                    break;
+                case "string":
+                    o = obj + "";
+                    break;
+                case "number":
+                    o = obj - 0;
+                    break;
+                case "boolean":
+                    o = obj;
+                    break;
+                case "object": // object 分为两种情况 对象（Object）或数组（Array）
+                    if(obj == null){
+                        o = null;
+                    } else {
+                        if(Object.prototype.toString.call(obj).slice(8, -1) == 'Array'){
+                            o = [];
+                            for(var i = 0;i < obj.length; i++) {
+                                o.push(obj[i]);
+                            }
+                        } else {
+                            o = {};
+                            for (var k in obj){
+                                o[k] = obj[k];
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    o = obj;
+                    break;
+            }
+            return o;
+        }
+        
+        var a = [12, 34, '124'];
+        console.log(clone(a));
+        var b = null;
+        console.log(clone(b));
+        var c = {1: 'a', 2: 'b', 3: 'c'};
+        console.log(clone(c));
+        // var d;
+        // console.log(clone(d)); // undefined
+        // var e = 4;
+        // console.log(clone(e));
+        
+    </script>
+</body>
+
+</html>

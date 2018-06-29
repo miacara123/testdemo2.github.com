@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 设为flex布局以后,子元素的float,clear和vertical-align属性将失效 */
+        .flexBox {
+            width: 300px;
+            height: 300px;
+            color: rgb(226, 174, 174);
+            background-color: #ddd;
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* align-items: center; */
+            /* justify-content: space-around; */
+        }
+        .flexBox div {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            /* display: inline-block; */
+            background-color: pink;
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flexBox">
+        <div style="background-color: #000;">元素1</div>
+        <div style="background-color: #fff;">元素2</div>
+        <div style="background-color: #000;">元素3</div>
+    </div>
+</body>
+
+</html>

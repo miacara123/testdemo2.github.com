@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">
+        <div class="slider-content">
+            <div>
+                <img src="./img/1.jpg">
+            </div>
+            <div>
+                <img src="./img/2.jpg">
+            </div>
+            <div>
+                <img src="./img/3.jpg">
+            </div>
+            <div>
+                <img src="./img/4.jpg">
+            </div>
+            <div>
+                <img src="./img/5.jpg">
+            </div>
+            <div>
+                <img src="./img/6.jpg">
+            </div>
+            <div>
+                <img src="./img/7.jpg">
+            </div>
+        </div>
+        <div class="slider-control">
+
+        </div>
+        <span id="prev"></span>
+        <span id="next"></span>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var box = $('.box')[0];
+            var contentBox = $('.slider-content')[0];
+            var controlBox = $('.slider-control')[0];
+            var imageDivArr = contentBox.getElementsByTagName('div');
+
+            var currentIndex = 0;
+            // 盒子的宽度
+            var boxWidth = box.offsetWidth;
+
+            // 动态创建下面的控制条
+            for (var i = 0; i < imageDivArr.length; i++) {
+                var span = document.createElement('span');
+                controlBox.appendChild(span);
+                //给span 加编号
+                span.index = i;
+                if (i == 0) {
+                    span.className = 'slider-control-bar current';
+                } else {
+                    span.className = 'slider-control-bar';
+                }
+
+                span.onclick = function () {
+                    // console.log(this);
+                    // 如果当前点击的按钮  就是当前的按钮  则不作操作
+                    if (currentIndex != this.index) {
+                        //点击的图片，在当前图片的右边
+                        if (this.index > currentIndex) {
+                            animate(imageDivArr[currentIndex], {
+                                left: -boxWidth
+                            });
+                            //被点击的图片 先放到最右边，然后再左移
+                            currentIndex = this.index;
+                            imageDivArr[currentIndex].style.left = boxWidth + 'px';
+                            // animate(imageDivArr[this.index],{
+                            // 	left : 0
+                            // });
+                        } else {
+                            //点击的图片 在当前图片的左边
+                            //当前图片右移
+                            animate(imageDivArr[currentIndex], {
+                                left: boxWidth
+                            })
+                            //被点击的图片 先放到最左边，然后再右移
+                            currentIndex = this.index; //一定不能少
+                            // 下面imageDivArr[]内，不能写this.index  会导致再次点击时，
+                            // 由于currentIndex没有被赋值，还是之前跳转到的那个currentIndex，就算currentIndex被放在右边 第一次被点击的this.index也还挡下次的this.index在上面
+                            imageDivArr[currentIndex].style.left = -boxWidth + 'px';
+                            // animate(imageDivArr[this.index],{
+                            // 	left : 0
+                            // });
+                        }
+                        animate(imageDivArr[this.index], {
+                            left: 0
+                        })
+                        refreshControlBar();
+                    }
+
+                }
+            }
+
+            // 当前第一个盒子放在left=0的位置,其余所有盒子放在left=310的位置（最右）
+            for (var i = 0; i < imageDivArr.length; i++) {
+                var imageDiv = imageDivArr[i];
+                imageDiv.style.left = boxWidth + 'px';
+                // if(i == 0){
+                // 	imageDiv.style.left = '0';
+                // }else{
+                // 	imageDiv.style.left = boxWidth + 'px';
+                // }
+            }
+            imageDivArr[0].style.left = '0';
+            // 第一个图片向左滑出 第二张从右边滑入
+
+            // 自动显示下一张图片
+            function nextImage() {
+                // 当前图片向左滑出
+                animate(imageDivArr[currentIndex], {
+                    left: -boxWidth
+                });
+                // 下一张图片从右边滑入
+                currentIndex++;
+                if (currentIndex > imageDivArr.length - 1) {
+                    currentIndex = 0;
+                }
+                // 先将下一张图片放到最右边
+                imageDivArr[currentIndex].style.left = boxWidth + 'px';
+                // 向左移动的距离
+                animate(imageDivArr[currentIndex], {
+                    left: 0
+                });
+
+                // 刷新控制条显示
+                refreshControlBar();
+            }
+
+            function prevImage() {
+                animate(imageDivArr[currentIndex], {
+                    left: boxWidth
+                });
+                currentIndex--;
+                if (currentIndex < 0) {
+                    currentIndex = imageDivArr.length - 1;
+                }
+                imageDivArr[currentIndex].style.left = -boxWidth + 'px';
+                animate(imageDivArr[currentIndex], {
+                    left: 0
+                });
+                refreshControlBar();
+            }
+
+            function refreshControlBar() {
+                //刷新当前的控制条
+                //所有控制条 取消current类
+                for (var i = 0; i < controlBox.children.length; i++) {
+                    var bar = controlBox.children[i];
+                    bar.className = 'slider-control-bar';
+                }
+                controlBox.children[currentIndex].className = 'slider-control-bar current';
+            }
+            //通过左右按钮切换
+            $('#next').onclick = nextImage;
+            $('#prev').onclick = prevImage;
+
+            //开启自动播放
+            var timer = setInterval(nextImage, 2000);
+            box.onmouseover = function () {
+                clearInterval(timer);
+            }
+            box.onmouseout = function () {
+                timer = setInterval(nextImage, 2000);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

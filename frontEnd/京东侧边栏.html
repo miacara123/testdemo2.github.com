@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .nav {
+            width: 36px;
+            /*height: 228px;*/
+            position: fixed;
+            top: 50%;
+            margin-top: -118px;
+            left: 50%;
+            margin-left: 500px;
+            display: none;
+            border: 1px solid #f10215;
+        }
+
+        .nav ul {
+            list-style: none;
+        }
+
+        .nav li {
+            width: 36px;
+            height: 36px;
+            border-top: 1px solid #f10215;
+            margin-top: -1px;
+        }
+
+        .nav li a {
+            display: block;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: center;
+            text-decoration: none;
+            padding: 3px 0;
+            color: #666;
+            background: url('./images/bg.png') no-repeat 0 0;
+            color: transparent;
+            background-color: #f8f8f8;
+        }
+
+        .nav li a:hover,
+        .nav li.current a {
+            color: #fff !important;
+            background-color: #f10215;
+            background-image: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div>
+            <img src="./images/top.png" alt="" />
+        </div>
+        <div>
+            <img src="./images/jia.png" alt="" />
+        </div>
+        <div>
+            <img src="./images/dian.png" alt="" />
+        </div>
+        <div>
+            <img src="./images/fu.png" alt="" />
+        </div>
+        <div>
+            <img src="./images/mei.png" alt="" />
+        </div>
+        <div>
+            <img src="./images/bottom.png" alt="" />
+        </div>
+    </div>
+    <div class="nav">
+        <ul>
+            <li class="current">
+                <a href="javascript:;">家电
+                    <br />通讯</a>
+            </li>
+            <li>
+                <a href="javascript:;">电脑
+                    <br />数码</a>
+            </li>
+            <li>
+                <a href="javascript:;">服饰
+                    <br />鞋包</a>
+            </li>
+            <li>
+                <a href="javascript:;">美容
+                    <br />珠宝</a>
+            </li>
+            <li>
+                <a href="javascript:;">居家
+                    <br />生活</a>
+            </li>
+            <li id="returnTop">
+                <a href="javascript:;">返回
+                    <br />顶部</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+            // 根据不同的按钮  来设置不同的 background-position
+            // $('.nav > ul > li > a').each(function(index,element){
+            // 		$(element).css('background-position','')
+            // })
+
+            //最后一个a不需要设置背景图片
+            //通过先选中最后一个，再通过siblings来反选其他的a
+            $('#returnTop').siblings().find('a').each(function (index, element) {
+                $(element).css('background-position', '0 -' + index * 55 + 'px').click(function () {
+
+                    // 要获取的是li的index而不是a的index
+                    // index()  获取当前元素在父元素中的序号
+                    var index = $(this).parent().index();
+                    console.log(index);
+                    var targetBox = $('.box div').eq(index + 1);
+                    // 获取最顶部的top值
+                    // 在jQuery中，通过offset()函数获取offset值，top来获取top方向的值
+
+                    // 滚到目标位置
+                    $('html,body').stop().animate({
+                        scrollTop: targetBox.offset().top
+                    });
+
+                    // console.log(targetBox);
+                    // console.log(index);
+                    // $(this).addClass('current').remove('current');
+                })
+            })
+
+            // 单独操作最后一个
+            $('#returnTop a').css({
+                backgroundImage: 'none',
+                color: '#666'
+            }).click(function () {
+                $('html,body').stop().animate({
+                    scrollTop: 0
+                })
+            })
+
+            $(window).scroll(function () {
+                // 获取滚动的高度
+                var scrollTop = $(document).scrollTop();
+
+                // 根据各个div的offsettop值 来判断当前是在第几个div
+                if (scrollTop < $('.box div').eq(1).offset().top) {
+                    $('.nav').fadeOut();
+                } else {
+                    $('.nav').fadeIn();
+                    // 根据滑动值  来判断是第几个栏目
+                    if (scrollTop < $('.box div').eq(2).offset().top) {
+                        console.log('eq2');
+                    }
+
+                    var minIndex = 6;
+                    $('.box div').each(function (index, element) {
+                        if (scrollTop < $(element).offset().top) {
+                            // console.log(index);
+                            if (index < minIndex) {
+                                minIndex = index;
+                            }
+                        }
+                    })
+                    // console.log(minIndex);
+                    minIndex -= 2;
+                    // 点亮相对于的li
+                    // 在jQuery中的class操作
+                    $('.nav li').eq(minIndex).addClass('current').siblings('li').removeClass('current');
+                }
+            })
+
+        })
+
+
+        // $(function(){
+        // 	$('#returnTop').siblings().find('a').each(function(index,elements){
+        // 		$(elements).css('background-position','0 -'+index * 55+'px');
+        // 	}).click(function(){
+        // 		// index()  获取当前元素在父元素中的序号
+        // 		var index = $(this).parent().index();
+        // 		console.log(index);
+        // 		var target = $('.box div').eq(index+1);
+        // 		console.log(target);
+        // 		$('html,body').stop().animate({scrollTop : target.offset().top});
+
+        // 		$(this).addClass('current').remove('current');
+
+        // 	})
+
+        // 	$('#returnTop').click(function(){
+        // 		$('html,body').stop().animate({scrollTop : 0});
+        // 	})
+
+        // 	$(window).scroll(function(){
+        // 		var scrollTop = $(document).scrollTop();
+        // 		// console.log(scrollTop);
+        // 		if(scrollTop < $('.box div').eq(1).offset().top){
+        // 			$('.nav').fadeOut();
+        // 		}else{
+        // 			$('.nav').fadeIn();
+
+        // 			$('.box div').each(function(index,elements){
+        // 				// var index1 = index;
+        // 				if(scrollTop > $(elements).offset().top){
+        // 					// index1+=index1-1;
+        // 					console.log(index);
+        // 					$('.nav ul li').eq(index-1).addClass('current').siblings().removeClass('current');
+        // 				}
+
+        // 			})
+        // 		}
+
+        // 	})
+        // })
+    </script>
+
+</body>
+
+</html>

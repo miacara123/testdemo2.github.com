@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!-- <%= %>直接输出HTML标签到页面上,输出的是转义后的变量值  -->
+    <!-- <%- %>没有直接输出HTML标签到页面上,输出的是没有转义后的变量值  -->
+    <!-- <% %>循环出来了参数中的值,标签中是javascript逻辑代码 -->
+    <%= title %>
+    <%- title %>
+    <% users.forEach(function(user){ %>
+      <h6><%= user.username %></h6>
+    <% }) %>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="test">
+        <li>这是第一条</li>
+        <li>这是第二条</li>
+        <li>这是第三条</li>
+        <li>这是第四条</li>
+    </ul>
+    <script>
+        // 闭包 点击每一列的时候输出其index
+        var lis = document.getElementById("test").getElementsByTagName("li");
+        for (var i = 0; i < lis.length; i++) {
+            // lis[i].index = i;
+            // lis[i].onclick = function() {
+            //     console.log(this.index);
+            // }
+
+            lis[i].onclick = (function (a) {
+                return function () {
+                    console.log(a);
+                }
+            })(i)
+
+        };
+    </script>
+    <script>
+        // 定义一个log方法，让它可以代理console.log的方法
+        // apply第二个参数是一个参数数组; call第二个参数是一个参数列表
+        // B.apply(A, arguments); // 即A对象应用B对象的方法
+        // B.call(A, args1, args2); // 即A对象应用B对象的方法
+        function log() {
+            console.log.apply(console, arguments);
+        }
+        log("hello", "world!", "book");
+    </script>
+    <script>
+        var User = {
+            count: 1,
+            getCount: function() {
+                return this.count;
+            }
+        }
+        console.log(User.getCount()); // 1 这里的调用者是User,this指向User
+        var func = User.getCount; // 这时func是在window的上下文执行的,return中的this指向的是window,所以会访问不到count属性
+        console.log(func());  // undefined 因为func是在window的上下文中被执行的,所以会访问不到count属性
+        var func2 = User.getCount.bind(User); // 可以将this指向User
+        console.log(func2()); 
+    </script>
+</body>
+
+</html>

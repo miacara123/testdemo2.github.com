@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    帐号:<input type="text"><br>
+    密码:<input type="password"><br>
+    <input type="checkbox">自动登录
+    <input type="checkbox">记住密码<br>
+    <input type="button" value="注册">
+    <input type="button" value="登录">
+
+    <script>
+        var checkboxs = document.getElementsByTagName('input');
+        var arr = [];
+        for(var i = 0;i < checkboxs.length; i++){
+            if(checkboxs[i].type == 'checkbox') {
+                arr.push(checkboxs[i]);
+            }
+        }
+
+        console.log(arr);
+    </script>
+
+</body>
+</html>

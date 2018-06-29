@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 已知有字符串foo="get-element-by-id",写一个function将其转化成驼峰表示法"getElementById"。
+        var foo = "get-element-by-id";
+        var arr = foo.split("-");
+        var first = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+            var arr2 = arr[i].split("")
+            arr2[0] = arr2[0].toUpperCase();
+            arr[i] = arr2.join("");
+        }
+        var nFoo = arr.join("");
+        console.log(nFoo);
+    </script>
+    <script>
+        var numberArray = [3, 6, 2, 4, 1, 5];
+        // 1. 实现对该数组的倒排, 输出[5, 1, 4, 2, 6, 3]
+        numberArray.reverse();
+        console.log(numberArray);
+        // 2. 实现对数组降序输出
+        numberArray.sort(function (a, b) {
+            return a - b;
+        })
+        console.log(numberArray);
+    </script>
+    <script>
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        month = month < 10 ? '0' + month : month;
+        var day = d.getDate();
+        day = day < 10 ? '0' + day : day;
+        console.log(year + '-' + month + '-' + day);
+    </script>
+    <script>
+        foo = foo || bar;
+        // 等价于
+        if (!foo) foo = bar; // 如果foo存在,值不变,否则把bar的值赋给foo
+    </script>
+    <script>
+        var foo = 1;
+        (function () {
+            console.log(foo);
+            var foo = 2;
+            console.log(foo);
+        })();
+    </script>
+    <script>
+        // 已知有字符串foo="get-element-by-id",写一个function将其转化成驼峰表示法"getElementById"。
+        var foo = "get-element-by-id";
+        var arr = foo.split("-");
+        var first = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+            var arr2 = arr[i].split("")
+            arr2[0] = arr2[0].toUpperCase();
+            arr[i] = arr2.join("");
+        }
+        var nFoo = arr.join("");
+        console.log(nFoo);
+    </script>
+    <script>
+        // 用js实现随机选取10~100之间的10个数字,并存入一个数组排序
+        var arr = [];
+        for (var i = 0; i < 10; i++) {
+            var n = Math.round(Math.random() * 90) + 10;
+            arr.push(n);
+        }
+        arr.sort(function (a, b) { // 从小到大排序
+            return b - a;
+        });
+        console.log(arr);
+    </script>
+    <script>
+        // 把两个数组合并,并删除第二个元素
+        var arr1 = ['a', 'b', 'c'];
+        var arr2 = ['d', 'e', 'f'];
+        var nArr = arr1.concat(arr2);
+        nArr.splice(1, 1);
+        console.log(nArr);
+    </script>
+    <script>
+        // 有这样一个URL：http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e，
+        // 请写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按key-value形式返回到一个json结构中，
+        // 如{a:'1', b:'2', c:'', d:'xxx', e:undefined}
+
+        function serilizeUrl(url) {
+            var index = url.indexOf('?');
+            var nUrl = url.slice(index + 1);
+            var arr = nUrl.split("&");
+            var obj = {};
+            for (var i = 0; i < arr.length; i++) {
+                obj[arr[i].split("=")[0]] = arr[i].split("=")[1];
+            }
+            console.log(obj);
+        }
+        serilizeUrl("http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e");
+    </script>
+    <script>
+        // 编写一个方法,求一个字符串的字节长度
+        // (假设一个英文字符占用一个字节,一个中文字符占用两个字节)
+        function GetBytes(str) {
+            var len = str.length;
+            for (var i = 0; i < len; i++) {
+                if (str.charCodeAt(i) > 255) {
+                    len++;
+                }
+            }
+            return len;
+        }
+        console.log(GetBytes("你好os"));
+    </script>
+    <script>
+        // 判断一个字符串中出现次数最多的字符，统计这个次数
+        var str = "asdfssaaasasasasaa";
+        var obj = {};
+        for (var i = 0; i < str.length; i++) {
+            if (obj[str.charAt(i)]) {
+                obj[str.charAt(i)]++;
+            } else {
+                obj[str.charAt(i)] = 1;
+            }
+        }
+        console.log(obj);
+        var iMax = 0;
+        var iIndex = '';
+        for (var o in obj) {
+            if (obj[o] > iMax) {
+                iMax = obj[o];
+                iIndex = o;
+            }
+        }
+        console.log('出现次数最多的是:' + iIndex + '出现了' + iMax + '次');
+    </script>
+</body>
+
+</html>

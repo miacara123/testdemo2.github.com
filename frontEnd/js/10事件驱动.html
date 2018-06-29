@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 80px; background-color: red;"></div>
+    <input type="button" value="black" onclick="test(this)">
+    <input type="button" value="pink" onclick="test(this)"/>
+    <script>
+        // js是采用事件驱动的机制来响应用户操作的，也就是说当用户对某个html元素进行操作的时候，会产生一个事件，该事件会驱动某些函数来处理。
+        function test(e) {
+            if(e.value == "black") {
+                var div1 = document.getElementById("div1");
+                div1.style.background = 'black';
+            } else {
+                var div1 = document.getElementById("div1");
+                div1.style.background = 'pink';
+            }
+        }
+    </script>
+</body>
+</html>
